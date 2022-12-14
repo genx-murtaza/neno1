@@ -40,9 +40,9 @@
             <!-- Menu -->
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="https://www.masgroup.co.ke" class="app-brand-link">
+                    <a href="https://www.neno.co.in" target="_blank" class="app-brand-link">
                     <span class="app-brand-logo demo">
-                        <img src="{{url('/assets/img/favicon/logo.png')}}">
+                        <img src="{{url('/assets/img/favicon/neno.png')}}">
                     </span>
                     </a>
 
@@ -109,10 +109,10 @@
                             <div data-i18n="Basic">User Master</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ request()->is('clientrecord') ? 'active' : '' }}">
-                        <a href="{{url('/clientrecord')}}" class="menu-link">
+                    <li class="menu-item {{ request()->is('customers') ? 'active' : '' }}">
+                        <a href="{{url('/customers')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-data"></i>
-                            <div data-i18n="Basic">Client Record</div>
+                            <div data-i18n="Basic">Customers</div>
                         </a>
                     </li>
 
@@ -406,13 +406,13 @@
                             ?>
 
                             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                            <!-- Search -->
+                            {{-- <!-- Search -->
                             <div class="navbar-nav align-items-center">
                                 <div class="nav-item d-flex align-items-center">
                                     Welcome, {{session()->get('fullname')}}
                                 </div>
                             </div>
-                            <!-- /Search -->
+                            <!-- /Search --> --}}
 
                             <ul class="navbar-nav flex-row align-items-center ms-auto">
                                 <!-- Place this tag where you want the button to render. -->

@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GenxController;
-
+use App\Http\Livewire\Customer;
+use App\Http\Livewire\CustomerMaster;
+use App\Http\Livewire\CustomerAdduser;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +30,6 @@ Route::post('/usermaster/edituser/{id}',[GenxController::class,'saveedituser'])-
 Route::get('/usermaster/deleteuser/{id}',[GenxController::class,'deleteuser'])->name('usermaster.deleteuser');
 Route::post('/usermaster/deleteuser/{id}',[GenxController::class,'confirmdeleteuser'])->name('usermaster.confirmdeleteuser');
 Route::get('/usermaster/sendpassword/{id}',[GenxController::class,'sendpassword'])->name('usermaster.sendpassword');
+
+Route::get('/customers', CustomerMaster::class);
+Route::get('/customers/adduser', CustomerAdduser::class);

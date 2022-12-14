@@ -10,7 +10,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master /</span> User Master</h4>
             <div class= "d-flex justify-content-end mb-2">
-                <a href="{{url('/usermaster/adduser')}}"> <button class="btn btn-primary"> Add User </button> </a>
+                <a href="{{url('/usermaster/adduser')}}"> <button class="btn btn-primary"> <i class="bx bx-user-plus mr-1"> </i> Add User </button> </a>
             </div>
 
             <!-- Hoverable Table rows -->
