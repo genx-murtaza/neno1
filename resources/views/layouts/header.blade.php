@@ -104,13 +104,26 @@
                     </li>
 
                     <!-- Users Master-->
-                    <li class="menu-item {{ request()->is('usermaster') ? 'active' : '' }}">
+                    @if (request()->is('usermaster') or request()->is('usermaster/adduser') or request()->is('usermaster/edituser/{id?}'))
+                        <?php $mk='active'; ?>
+                    @else
+                        <?php $mk=''; ?>
+                    @endif
+
+                    <li class="menu-item {{$mk}}">
+                    {{-- {{ request()->is('usermaster') ? 'active' : '' }}"> --}}
                         <a href="{{url('/usermaster')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Basic">User Master</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ request()->is('customers') ? 'active' : '' }}">
+
+                    @if (request()->is('customers') or request()->is('customers/adduser'))
+                        <?php $mk='active'; ?>
+                    @else
+                       <?php $mk=''; ?>
+                    @endif
+                    <li class="menu-item {{$mk}}">
                         <a href="{{url('/customers')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-data"></i>
                             <div data-i18n="Basic">Customers</div>
