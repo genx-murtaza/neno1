@@ -8,10 +8,33 @@
         <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master /</span> Customers</h4>
-            <div class= "d-flex justify-content-end mb-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style2 mb-0">
+                  <li class="breadcrumb-item">
+                    <a href="javascript:void(0);">Master</a>
+                  </li>
+                  <li class="breadcrumb-item active">Customers</li>
+                </ol>
+            </nav>
+
+            <div class= "d-flex justify-content-end mb-2 mt-2">
                 <a href="{{url('/customers/adduser')}}"> <button class="btn btn-primary"> <i class="bx bx-plus-circle mr-1"> </i> Add New Customer </button> </a>
             </div>
+
+            @if(Session::has('message'))
+                <div class="toast-container">
+                    <div class="bs-toast toast-placement-ex m-5 top-0 end-0 toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">Neno Laser Clinic</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        {{Session('message')}}
+                    </div>
+                    </div>
+                </div>
+            @endif
 
             <!-- Hoverable Table rows -->
             <div class="card">

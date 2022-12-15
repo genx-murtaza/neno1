@@ -124,7 +124,7 @@ class GenxController extends Controller
                 $login->photo = "0";
             $login->save();
 
-            return redirect('usermaster')->with('message', 'Your Record has been Successfully Added');
+            return redirect('usermaster')->with('message', 'Record has been Successfully Added');
             die();
         }
     }
@@ -188,7 +188,7 @@ class GenxController extends Controller
                 $data->photo = "1";
             }
             $data->save();
-            return redirect('usermaster')->with('message', 'Your Record has been Successfully Edited');
+            return redirect('usermaster')->with('message', 'Record has been Successfully Edited');
             die();
     }
 
@@ -236,7 +236,7 @@ class GenxController extends Controller
 
         @mail($email, $subject, $message, $headers);
 
-        return redirect('usermaster')->with('message', 'Your Password has been sent to in your Email');
+        return redirect('usermaster')->with('message', 'Your Password has been sent to your Email');
         die();
     }
 }

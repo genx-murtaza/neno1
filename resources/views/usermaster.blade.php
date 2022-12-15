@@ -8,40 +8,42 @@
         <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master /</span> User Master</h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style2 mb-0">
+                  <li class="breadcrumb-item">
+                    <a href="javascript:void(0);">Master</a>
+                  </li>
+                  <li class="breadcrumb-item active">User Master</li>
+                </ol>
+            </nav>
 
-                {{-- @if(Session::has('message'))
-                    <div class="menu-inner py-1">
-                                    <script>
-                                            toastr.options =
-                                            {
-                                                "closeButton": false,
-                                                "debug": false,
-                                                "newestOnTop": false,
-                                                "progressBar": true,
-                                                "positionClass": "toast-top-right",
-                                                "preventDuplicates": false,
-                                                "onclick": null,
-                                                "showDuration": "300",
-                                                "hideDuration": "1000",
-                                                "timeOut": "5000",
-                                                "extendedTimeOut": "1000",
-                                                "showEasing": "swing",
-                                                "hideEasing": "linear",
-                                                "showMethod": "fadeIn",
-                                                "hideMethod": "fadeOut"
-                                            }
-                                            toastr["success"]("User Successfully Added", "NENO Laser Clinic");
-                                    </script>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{Session('message')}}</strong>
-                        </div>
-                    </div>
-                @endif --}}
-
-            <div class= "d-flex justify-content-end mb-2">
+            <div class= "d-flex justify-content-end mb-2 mt-2">
                 <a href="{{url('/usermaster/adduser')}}"> <button class="btn btn-primary"> <i class="bx bx-user-plus mr-1"> </i> Add User </button> </a>
             </div>
+
+                @if(Session::has('message'))
+                    <div class="toast-container">
+                        <div class="bs-toast toast-placement-ex m-5 top-0 end-0 toast fade show" role="alert" aria-live="assertive" data-delay="2000" aria-atomic="true">
+                            <div class="toast-header">
+                                <i class="bx bx-bell me-2"></i>
+                                <div class="me-auto fw-semibold">Neno Laser Clinic</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                {{Session('message')}}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="bs-toast toast toast-placement-ex m-2" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                        <div class="toast-header">
+                            <i class="bx bx-bell me-2"></i>
+                            <div class="me-auto fw-semibold">Neno Laser Clinic</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                        <div class="toast-body">{{Session('message')}}</div>
+                    </div> --}}
+                @endif
 
             <!-- Hoverable Table rows -->
             <div class="card">
@@ -166,9 +168,9 @@
         </div>
 
         <!-- / Content -->
-        @if(Session::has('message'))
+        {{-- @if(Session::has('message'))
             <script> alert("{{Session('message')}}"); </script>
-        @endif
+        @endif --}}
 
     @endsection
 

@@ -6,7 +6,17 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / User Master / </span> Delete User</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-style2 mb-0">
+                      <li class="breadcrumb-item">
+                        <a href="javascript:void(0);">Master</a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="{{url('/usermaster')}}">User Master</a>
+                      </li>
+                      <li class="breadcrumb-item active">Delete User</li>
+                    </ol>
+                </nav>
 
                 <!-- Basic with Icons -->
                 <div class="col-xxl">

@@ -7,21 +7,27 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Customer / </span> Register New Customer</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-style2 mb-0">
+                      <li class="breadcrumb-item">
+                        <a href="javascript:void(0);">Master</a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="{{url('/customers')}}">Customer</a>
+                      </li>
+                      <li class="breadcrumb-item active">Register New Customer</li>
+                    </ol>
+                </nav>
 
                 <!-- Basic with Icons -->
                 <div class="col-xxl">
                   <div class="card mb-4">
-                    {{-- <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="mb-1">Basic with Icons</h5>
-                      <small class="text-muted float-end">Merged input group</small>
-                    </div> --}}
                     <div class="card-body">
                         @if(Session::has('fail'))
                             <div class="alert alert-danger">{{Session::get('fail')}} </div>
                         @endif
 
-                      <form action="{{url('/usermaster/adduser')}}" method="post" enctype="multipart/form-data">
+                      <form action="" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Full Name</label>
@@ -149,7 +155,7 @@
                             <button type="submit" class="btn btn-primary">
                                 <i class="menu-icon tf-icons bx bx-save"></i> Register</button>
 
-                            <a href="{{url('/usermaster')}}">
+                            <a href="{{url('/customers')}}">
                                 <button type="button" class="btn btn-primary">
                                     <i class="menu-icon tf-icons bx bx-block"></i> Cancel</button>
                             </a>
