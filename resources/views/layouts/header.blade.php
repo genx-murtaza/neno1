@@ -8,14 +8,12 @@
     <meta name="description" content="" />
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{url('assets/img/favicon/favicon.png')}}" />
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{url('assets/vendor/fonts/boxicons.css')}}" />
-    <link rel="stylesheet" href="{{url('fonts/font-awesome-4.7.0/css/fontawesome.min.css')}}" />
-
+    <link rel="stylesheet" href="{{asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}" />
+    <!-- Alerts -->
+    <link href="{{asset('assets/vendor/toastr/toastr.min.css')}}" rel="stylesheet"/>
+    <script src="{{asset('assets/vendor/toastr/toastr.min.js')}}"></script>
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{url('assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{url('assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
@@ -28,8 +26,11 @@
     <script src="{{url('assets/js/config.js')}}"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
@@ -468,12 +469,12 @@
                                         <span class="align-middle">My Profile</span>
                                     </a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                     <a class="dropdown-item" href="#">
                                         <i class="bx bx-cog me-2"></i>
                                         <span class="align-middle">Settings</span>
                                     </a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                     <div class="dropdown-divider"></div>
                                     </li>

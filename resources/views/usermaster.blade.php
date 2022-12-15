@@ -9,6 +9,36 @@
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master /</span> User Master</h4>
+
+                {{-- @if(Session::has('message'))
+                    <div class="menu-inner py-1">
+                                    <script>
+                                            toastr.options =
+                                            {
+                                                "closeButton": false,
+                                                "debug": false,
+                                                "newestOnTop": false,
+                                                "progressBar": true,
+                                                "positionClass": "toast-top-right",
+                                                "preventDuplicates": false,
+                                                "onclick": null,
+                                                "showDuration": "300",
+                                                "hideDuration": "1000",
+                                                "timeOut": "5000",
+                                                "extendedTimeOut": "1000",
+                                                "showEasing": "swing",
+                                                "hideEasing": "linear",
+                                                "showMethod": "fadeIn",
+                                                "hideMethod": "fadeOut"
+                                            }
+                                            toastr["success"]("User Successfully Added", "NENO Laser Clinic");
+                                    </script>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{Session('message')}}</strong>
+                        </div>
+                    </div>
+                @endif --}}
+
             <div class= "d-flex justify-content-end mb-2">
                 <a href="{{url('/usermaster/adduser')}}"> <button class="btn btn-primary"> <i class="bx bx-user-plus mr-1"> </i> Add User </button> </a>
             </div>

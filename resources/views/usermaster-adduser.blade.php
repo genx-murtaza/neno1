@@ -108,7 +108,7 @@
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                               <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                              <input type="text" class="form-control" placeholder="admin@masgroup.co.ke" value="{{old('email')}}" name="email" Required/>
+                              <input type="text" class="form-control" placeholder="admin@neno.co.in" value="{{old('email')}}" name="email" Required/>
                               @error('email')
                                   {{$message}}
                                 @enderror

@@ -31,5 +31,5 @@ Route::get('/usermaster/deleteuser/{id}',[GenxController::class,'deleteuser'])->
 Route::post('/usermaster/deleteuser/{id}',[GenxController::class,'confirmdeleteuser'])->name('usermaster.confirmdeleteuser');
 Route::get('/usermaster/sendpassword/{id}',[GenxController::class,'sendpassword'])->name('usermaster.sendpassword');
 
-Route::get('/customers', CustomerMaster::class);
-Route::get('/customers/adduser', CustomerAdduser::class);
+Route::get('/customers', CustomerMaster::class)->name('customer.master');
+Route::get('/customers/adduser', CustomerAdduser::class)->name('customer.master.adduser');

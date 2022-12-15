@@ -30,7 +30,6 @@
     <script src="{{url('assets/vendor/js/menu.js')}}"></script>
     <script src="{{url('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
     <script src="{{url('assets/js/main.js')}}"></script>
-    <script src="{{url('assets/toastr/toastr.js')}}"></script>
     <script src="{{url('assets/js/dashboards-analytics.js')}}"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
