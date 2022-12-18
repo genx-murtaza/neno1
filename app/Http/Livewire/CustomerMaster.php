@@ -8,16 +8,6 @@ use App\Models\Customer;
 
 class CustomerMaster extends Component
 {
-    public $cid;
-    public $cname;
-    public $ccontact;
-    public $cemail;
-    public $cdob;
-    public $ctreatment;
-    public $ctotalamt;
-    public $ctotaldisc;
-    public $creference;
-
     public $allcustomers = [];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';

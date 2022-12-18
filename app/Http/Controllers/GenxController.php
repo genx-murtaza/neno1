@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Login;
+use App\Models\Customer;
+use App\Models\Payment;
+use App\Models\Treatment;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 
 class GenxController extends Controller
 {
+
+    // Login Authentication
+
     public function authentication()
     {
         return view ('authentication');
-    }
-
-    public function dashboard()
-    {
-        return view ('dashboard');
     }
 
     public function check_authentication(Request $req)
@@ -66,12 +68,29 @@ class GenxController extends Controller
 
     }
 
+    // Dashboard
+
+    public function dashboard()
+    {
+        return view ('dashboard');
+    }
+
+    // User
+
+
     public function usermaster()
     {
         $allusers = Login::get();
 
         $data = compact('allusers');
         return view ('usermaster')->with($data);
+    }
+
+
+    public function adduser()
+    {
+        return view ('usermaster-adduser');
+
     }
 
     public function saveadduser(Request $request)
@@ -127,12 +146,6 @@ class GenxController extends Controller
             return redirect('usermaster')->with('message', 'Record has been Successfully Added');
             die();
         }
-    }
-
-    public function adduser()
-    {
-        return view ('usermaster-adduser');
-
     }
 
     public function changeactive($id)
@@ -239,4 +252,54 @@ class GenxController extends Controller
         return redirect('usermaster')->with('message', 'Your Password has been sent to your Email');
         die();
     }
+
+
+    // Customer
+
+    public function customermaster()
+    {
+        $allcustomers = Customer::get();
+
+        $data = compact('allcustomers');
+        return view ('customermaster')->with($data);
+    }
+
+    public function addcustomer()
+    {
+        return view ('customermaster-adduser');
+
+    }
+
+    public function saveaddcustomer(Request $request)
+    {
+        $request->validate(
+            [
+                'fullname' => 'required|min:5|max:50',
+                'phone'=>'min:10|max:21',
+                'email'=>'email',
+                'treatment' => 'required|min:10|max:250',
+                'amount' => 'required|min:3|max:6',
+                'discount' => 'min:3|max:6',
+                'reference' => 'min:5|max:50',
+            ]
+            );
+
+            $login = new Customer;
+            $login->cname = $request['fullname'];
+            $login->ccontact = $request['phone'];
+            $login->cemail = $request['email'];
+            $login->cdob = $request['dob'];
+            $login->ctreatment = $request['treatment'];
+            $login->ctotalamt = $request['amount'];
+            $login->ctotaldisc = $request['discount'];
+            $login->creference = $request['reference'];
+
+            $login->save();
+
+            return redirect('customers')->with('message', 'Customer Record has been Successfully Added');
+            die();
+
+    }
+
+
 }

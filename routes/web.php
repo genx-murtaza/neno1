@@ -21,6 +21,7 @@ Route::get('/', [GenxController::class, 'authentication']);
 Route::post('/', [GenxController::class, 'check_authentication']);
 Route::get('/dashboard', [GenxController::class, 'dashboard']);
 Route::get('/logout', [GenxController::class, 'logout']);
+
 Route::get('/usermaster', [GenxController::class, 'usermaster']);
 Route::get('/usermaster/adduser', [GenxController::class, 'adduser']);
 Route::post('/usermaster/adduser', [GenxController::class, 'saveadduser']);
@@ -31,5 +32,9 @@ Route::get('/usermaster/deleteuser/{id}',[GenxController::class,'deleteuser'])->
 Route::post('/usermaster/deleteuser/{id}',[GenxController::class,'confirmdeleteuser'])->name('usermaster.confirmdeleteuser');
 Route::get('/usermaster/sendpassword/{id}',[GenxController::class,'sendpassword'])->name('usermaster.sendpassword');
 
-Route::get('/customers', CustomerMaster::class)->name('customer.master');
-Route::get('/customers/adduser', CustomerAdduser::class)->name('customer.master.adduser');
+Route::get('/customers', [GenxController::class, 'customermaster']);
+Route::get('/customers/addcustomer', [GenxController::class, 'addcustomer']);
+Route::post('/customers/addcustomer', [GenxController::class, 'saveaddcustomer']);
+
+// Route::get('/customers', CustomerMaster::class);
+// Route::get('/customers/adduser', CustomerAdduser::class);
