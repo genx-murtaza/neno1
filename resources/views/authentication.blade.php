@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Neno, Surat</title>
+    <title>Neno Laser Clinic</title>
     <meta name="description" content="" />
 
     <!-- Favicon -->
@@ -44,7 +44,7 @@
                   {{-- <span class="app-brand-text demo text-body fw-bolder">MAS Group</span> --}}
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Neno Surat! 👋</h4>
+              <h4 class="mb-2">Welcome to Neno Laser Clinic 👋</h4>
               <p class="mb-4">Please sign-in to your account</p>
 
               <form id="formAuthentication" class="mb-3" action="{{ url('/') }}" method="POST">

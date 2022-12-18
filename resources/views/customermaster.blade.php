@@ -65,16 +65,16 @@
                     <tr>
                     <td> <p style="font-size:13px"> {{$no++}} </p> </td>
                     <td> <p style="font-size:13px"> {{$value->cname}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->ccontact}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->cemail}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->cdob}} </p> </td>
+                    <td> <p style="font-size:13px"> {{$value->ccontact ? $value->ccontact : '---'}} </p> </td>
+                    <td> <p style="font-size:13px"> {{$value->cemail ? $value->cemail : '---' }} </p> </td>
+                    <td> <p style="font-size:13px"> {{$value->cdob ? date('d-M-Y',strtotime($value->cdob)) : '---' }} </p> </td>
                     <td> <p style="font-size:13px"> {{$value->ctreatment}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->camount}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->cdisc}} </p> </td>
-                    <td> <p style="font-size:13px"> Paid </p> </td>
-                    <td> <p style="font-size:13px"> Balance </p> </td>
-                    <td> <p style="font-size:13px"> Visits </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->creference}} </p> </td>
+                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->camount}} </div></p> </td>
+                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->cdisc ? $value->cdisc : '0'}} </div></p> </td>
+                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> 0 </div></p> </td>
+                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> 0 </div></p> </td>
+                    <td> <p style="font-size:13px"> 0 </p> </td>
+                    <td> <p style="font-size:13px"> {{$value->creference ? $value->creference : '---'}} </p> </td>
 
                     <td>
                         <div class="dropdown">

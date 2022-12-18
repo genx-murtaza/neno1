@@ -6,7 +6,7 @@
                                 <a href="" target="_blank" class="footer-link fw-bolder">GenX Technology Ltd.</a>
                             </div>
                             <div>
-                                <a href="https://www.masgroup.co.ke" class="footer-link me-4" target="_blank">License : NENO LASER & PARLOUR</a>
+                                <a href="https://www.masgroup.co.ke" class="footer-link me-4" target="_blank">License : Neno Laser Clinic</a>
                             </div>
                         </div>
                     </footer>

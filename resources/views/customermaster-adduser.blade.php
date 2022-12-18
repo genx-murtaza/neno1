@@ -38,7 +38,7 @@
                                   <i class="bx bx-book-content">
                                   </i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Full Name" value="{{old('fullname')}}" name="fullname" Required/>
+                                <input type="text" class="form-control" placeholder="Full Name" value="{{old('fullname')}}" name="fullname"/>
                                 @error('fullname')
                                   {{$message}}
                                 @enderror
@@ -81,7 +81,7 @@
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                               <span class="input-group-text"><i class="bx bx-calendar"></i></span>
-                              <input class="form-control" type="date" value="1982-10-23" id="html5-date-input" name="dob" />
+                              <input class="form-control" type="date" value="{{old('dob')}}" id="html5-date-input" name="dob" />
                               @error('dob')
                                   {{$message}}
                                 @enderror
@@ -96,7 +96,7 @@
                                   <span id="basic-icon-default-treatment" class="input-group-text">
                                       <i class="bx bx-book-content"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Treatment of Customer" value="{{old('treatment')}}" name="treatment" Required />
+                                  <input type="text" class="form-control" placeholder="Enter Treatment of Customer" value="{{old('treatment')}}" name="treatment" />
                                   @error('treatment')
                                     {{$message}}
                                   @enderror
@@ -111,7 +111,7 @@
                                   <span id="basic-icon-default-amount" class="input-group-text">
                                       <i class="bx bx-dollar"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Treatent Total Amount in Rs." value="{{old('amount')}}" name="amount" Required />
+                                  <input type="text" class="form-control" placeholder="Enter Treatent Total Amount in Rs." value="{{old('amount')}}" name="amount"/>
                                   <span class="input-group-text">.00</span>
                                   @error('amount')
                                     {{$message}}
@@ -156,7 +156,7 @@
                             <button type="submit" class="btn btn-primary">
                                 <i class="menu-icon tf-icons bx bx-save"></i> Register</button>
 
-                            <a href="{{url('/usermaster')}}">
+                            <a href="{{url('/customers')}}">
                                 <button type="button" class="btn btn-primary">
                                     <i class="menu-icon tf-icons bx bx-block"></i> Cancel</button>
                             </a>

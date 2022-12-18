@@ -272,28 +272,30 @@ class GenxController extends Controller
 
     public function saveaddcustomer(Request $request)
     {
+        $age18 = date('2004/01/01');
+        $startdt = date('1950/01/01');
         $request->validate(
             [
-                'fullname' => 'required|min:5|max:50',
-                'phone'=>'min:10|max:21',
-                'email'=>'email',
-                'treatment' => 'required|min:10|max:250',
-                'amount' => 'required|min:3|max:6',
-                'discount' => 'min:3|max:6',
-                'reference' => 'min:5|max:50',
+                'dob'           => 'nullable|after:'.$startdt.'|before:'.$age18,
+                'fullname'      => 'required|min:5|max:50',
+                'phone'         => 'nullable|min:10|max:21',
+                'email'         => 'nullable|email',
+                'treatment'     => 'required|min:10|max:250',
+                'amount'        => 'required|integer|min:1000|max:500000',
+                'discount'      => 'nullable|integer|min:100|max:100000',
+                'reference'     => 'nullable|min:5|max:50',
             ]
             );
 
-            $login = new Customer;
-            $login->cname = $request['fullname'];
-            $login->ccontact = $request['phone'];
-            $login->cemail = $request['email'];
-            $login->cdob = $request['dob'];
-            $login->ctreatment = $request['treatment'];
-            $login->ctotalamt = $request['amount'];
-            $login->ctotaldisc = $request['discount'];
-            $login->creference = $request['reference'];
-
+            $login              = new Customer;
+            $login->cname       = $request['fullname'];
+            $login->ccontact    = $request['phone'];
+            $login->cemail      = $request['email'];
+            $login->cdob        = $request['dob'];
+            $login->ctreatment  = $request['treatment'];
+            $login->camount     = $request['amount'];
+            $login->cdisc       = $request['discount'];
+            $login->creference  = $request['reference'];
             $login->save();
 
             return redirect('customers')->with('message', 'Customer Record has been Successfully Added');

@@ -41,7 +41,7 @@
                                   <i class="bx bx-book-content">
                                   </i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Full Name" value="{{old('fullname')}}" name="fullname" Required/>
+                                <input type="text" class="form-control" placeholder="Full Name" value="{{old('fullname')}}" name="fullname"/>
                                 @error('fullname')
                                   {{$message}}
                                 @enderror
@@ -56,7 +56,7 @@
                                 <span id="basic-icon-default-username" class="input-group-text">
                                     <i class="bx bx-user"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Enter Unique Username" value="{{old('username')}}" name="username" Required />
+                                <input type="text" class="form-control" placeholder="Enter Unique Username" value="{{old('username')}}" name="username" />
                                 @error('username')
                                   {{$message}}
                                 @enderror
@@ -89,7 +89,7 @@
                                   <i class="bx bx-key">
                                   </i>
                                 </span>
-                                <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation" Required/>
+                                <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation"/>
                                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 @error('password_confirmation')
                                   {{$message}}
@@ -105,7 +105,7 @@
                                 <span id="basic-icon-default-phone2" class="input-group-text" >
                                     <i class="bx bx-phone"></i>
                                 </span>
-                                <input type="text" class="form-control phone-mask" placeholder="0792381108" value="{{old('phone')}}" name="phone" Required />
+                                <input type="text" class="form-control phone-mask" placeholder="0792381108" value="{{old('phone')}}" name="phone" />
                                 @error('phone')
                                   {{$message}}
                                 @enderror
@@ -118,7 +118,7 @@
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                               <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                              <input type="text" class="form-control" placeholder="admin@neno.co.in" value="{{old('email')}}" name="email" Required/>
+                              <input type="text" class="form-control" placeholder="admin@neno.co.in" value="{{old('email')}}" name="email"/>
                               @error('email')
                                   {{$message}}
                                 @enderror
