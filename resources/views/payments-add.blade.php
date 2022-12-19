@@ -189,7 +189,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-icon-default-collected">Collected By</label>
                             <div class="col-sm-10">
                                 <div class="input-group input-group-merge">
@@ -205,7 +205,7 @@
                                 @enderror
                                 </div>
                               </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-icon-default-branch">Branch</label>

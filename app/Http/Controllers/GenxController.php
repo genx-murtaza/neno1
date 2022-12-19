@@ -436,7 +436,6 @@ class GenxController extends Controller
             [
                 'receiptdate'   => 'required|after:yesterday|before:tomorrow',
                 'amount'        => 'required_with:balance|integer|min:100|max:'.(int)$request->balance,
-                'collected'     => 'required|min:5|max:50',
             ]
             );
 
@@ -445,7 +444,7 @@ class GenxController extends Controller
             $payment->preceiptdt    = $request['receiptdate'];
             $payment->pamount       = $request['amount'];
             $payment->pmode         = $request['mode'];
-            $payment->receivedby    = $request['collected'];
+            $payment->receivedby    = Session('fullname');
             $payment->branch        = $request['branch'];
             $payment->cid           = $request['custid'];
             $payment->save();
