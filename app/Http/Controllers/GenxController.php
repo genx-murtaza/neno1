@@ -259,7 +259,6 @@ class GenxController extends Controller
     public function customermaster()
     {
         $allcustomers = Customer::get();
-
         $data = compact('allcustomers');
         return view ('customermaster')->with($data);
     }
@@ -408,10 +407,18 @@ class GenxController extends Controller
         }
     }
 
+    public static function calculatePayment($cid)
+    {
+        $paymentdone = Payment::where('cid',$cid)->sum('pamount');
+        return $paymentdone;
+    }
 
     public function addpayments()
     {
-        return view ('payments-add');
+        $custdetails = Customer::where(['cid' => Session('customerID')])->first();
+        $paymentdone = Payment::where('cid',Session('customerID'))->sum('pamount');
+        $data = compact('custdetails','paymentdone');
+        return view ('payments-add')->with($data);;
     }
 
 }

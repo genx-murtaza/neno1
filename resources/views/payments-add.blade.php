@@ -15,9 +15,9 @@
                         <a href="javascript:void(0);">Master</a>
                       </li>
                       <li class="breadcrumb-item">
-                        <a href="{{url('/customers')}}">Customer</a>
+                        <a href="{{url('/payments')}}">Payments</a>
                       </li>
-                      <li class="breadcrumb-item active">Register New Customer</li>
+                      <li class="breadcrumb-item active">Add Payment</li>
                     </ol>
                 </nav>
 
@@ -30,7 +30,7 @@
                             <div class="alert alert-danger">{{Session::get('fail')}} </div>
                         @endif
 
-                      <form action="{{url('/customers/add')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{url('/payments/add')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Full Name</label>
@@ -40,10 +40,7 @@
                                   <i class="bx bx-book-content">
                                   </i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Full Name" value="{{old('fullname')}}" name="fullname"/>
-                                @error('fullname')
-                                  {{$message}}
-                                @enderror
+                                <input type="text" class="form-control" value="{{$custdetails->cname}}" name="fullname" Readonly/>
                               </div>
                             </div>
                         </div>
@@ -55,38 +52,7 @@
                                 <span id="basic-icon-default-phone" class="input-group-text">
                                     <i class="bx bx-phone"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="9033755110" value="{{old('phone')}}" name="phone" />
-                                @error('phone')
-                                  {{$message}}
-                                @enderror
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Email</label>
-                            <div class="col-sm-10">
-                              <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-email" class="input-group-text" >
-                                    <i class="bx bx-envelope"></i>
-                                </span>
-                                <input type="text" class="form-control phone-mask" placeholder="admin@neno.co.in" value="{{old('email')}}" name="email" />
-                                @error('email')
-                                  {{$message}}
-                                @enderror
-                              </div>
-                            </div>
-                          </div>
-
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-icon-default-dob">Birthdate</label>
-                          <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                              <span class="input-group-text"><i class="bx bx-calendar"></i></span>
-                              <input class="form-control" type="date" value="{{old('dob')}}" id="html5-date-input" name="dob" />
-                              @error('dob')
-                                  {{$message}}
-                                @enderror
+                                <input type="text" class="form-control" value="{{$custdetails->ccontact}}" name="phone" Readonly/>
                             </div>
                           </div>
                         </div>
@@ -98,10 +64,7 @@
                                   <span id="basic-icon-default-treatment" class="input-group-text">
                                       <i class="bx bx-book-content"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Treatment of Customer" value="{{old('treatment')}}" name="treatment" />
-                                  @error('treatment')
-                                    {{$message}}
-                                  @enderror
+                                  <input type="text" class="form-control" value="{{$custdetails->ctreatment}}" name="treatment" Readonly/>
                               </div>
                             </div>
                         </div>
@@ -113,11 +76,8 @@
                                   <span id="basic-icon-default-amount" class="input-group-text">
                                       <i class="bx bx-dollar"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Treatent Total Amount in Rs." value="{{old('amount')}}" name="amount"/>
+                                  <input type="text" class="form-control" value="{{$custdetails->camount}}" name="amount" Readonly/>
                                   <span class="input-group-text">.00</span>
-                                  @error('amount')
-                                    {{$message}}
-                                  @enderror
                               </div>
                             </div>
                         </div>
@@ -129,7 +89,35 @@
                                   <span id="basic-icon-default-discount" class="input-group-text">
                                       <i class="bx bx-dollar"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Discount Rs." value="{{old('discount')}}" name="discount" />
+                                  <input type="text" class="form-control" value="{{$custdetails->cdisc?$custdetails->cdisc:'0'}}" name="discount" readonly/>
+                                  <span class="input-group-text">.00</span>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-amount">Amount Paid (Rs.)</label>
+                            <div class="col-sm-10">
+                              <div class="input-group input-group-merge">
+                                  <span id="basic-icon-default-amount" class="input-group-text">
+                                      <i class="bx bx-dollar"></i>
+                                  </span>
+                                  <input type="text" class="form-control" value="{{$paymentdone}}" name="amount" Readonly/>
+                                  <span class="input-group-text">.00</span>
+                              </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-discount">Discount Rs.</label>
+                            <div class="col-sm-10">
+                              <div class="input-group input-group-merge">
+                                  <span id="basic-icon-default-discount" class="input-group-text">
+                                      <i class="bx bx-dollar"></i>
+                                  </span>
+                                  <input type="text" class="form-control" value="{{$custdetails->cdisc?$custdetails->cdisc:'0'}}" name="discount" />
                                   <span class="input-group-text">.00</span>
                                   @error('discount')
                                     {{$message}}
@@ -138,27 +126,13 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-reference">Reference By</label>
-                            <div class="col-sm-10">
-                              <div class="input-group input-group-merge">
-                                  <span id="basic-icon-default-reference" class="input-group-text">
-                                      <i class="bx bx-user"></i>
-                                  </span>
-                                  <input type="text" class="form-control" placeholder="Reference By Person Name" value="{{old('reference')}}" name="reference" />
-                                  @error('reference')
-                                    {{$message}}
-                                  @enderror
-                              </div>
-                            </div>
-                        </div>
 
                         <div class="row justify-content-end">
                           <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary">
-                                <i class="menu-icon tf-icons bx bx-save"></i> Register</button>
+                                <i class="menu-icon tf-icons bx bx-save"></i> Save Payment</button>
 
-                            <a href="{{url('/customers')}}">
+                            <a href="{{url('/payments')}}">
                                 <button type="button" class="btn btn-primary">
                                     <i class="menu-icon tf-icons bx bx-block"></i> Cancel</button>
                             </a>

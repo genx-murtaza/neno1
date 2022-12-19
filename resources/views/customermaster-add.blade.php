@@ -111,7 +111,7 @@
                                   <span id="basic-icon-default-amount" class="input-group-text">
                                       <i class="bx bx-dollar"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Treatent Total Amount in Rs." value="{{old('amount')}}" name="amount"/>
+                                  <input type="text" class="form-control" placeholder="Enter Treatment Total Amount in Rs." value="{{old('amount')}}" name="amount"/>
                                   <span class="input-group-text">.00</span>
                                   @error('amount')
                                     {{$message}}

@@ -71,8 +71,12 @@
                     <td> <p style="font-size:13px"> {{$value->ctreatment}} </p> </td>
                     <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->camount}} </div></p> </td>
                     <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->cdisc ? $value->cdisc : '0'}} </div></p> </td>
-                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> 0 </div></p> </td>
-                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> 0 </div></p> </td>
+                    @php
+                        $paid = App\Http\Controllers\GenxController::calculatePayment($value->cid);
+                        $balance = $value->camount - $value->cdisc - $paid;
+                    @endphp
+                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px">{{$paid}}</div></p> </td>
+                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px">{{$balance}}</div></p> </td>
                     <td> <p style="font-size:13px"> 0 </p> </td>
                     <td> <p style="font-size:13px"> {{$value->creference ? $value->creference : '---'}} </p> </td>
 
