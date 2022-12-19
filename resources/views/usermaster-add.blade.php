@@ -31,7 +31,7 @@
                             <div class="alert alert-danger">{{Session::get('fail')}} </div>
                         @endif
 
-                      <form action="{{url('/usermaster/adduser')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{url('/usermaster/add')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Full Name</label>

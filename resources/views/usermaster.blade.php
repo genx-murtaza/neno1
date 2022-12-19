@@ -18,7 +18,7 @@
             </nav>
 
             <div class= "d-flex justify-content-end mb-2 mt-2">
-                <a href="{{url('/usermaster/adduser')}}"> <button class="btn btn-primary"> <i class="bx bx-user-plus mr-1"> </i> Add User </button> </a>
+                <a href="{{url('/usermaster/add')}}"> <button class="btn btn-primary"> <i class="bx bx-user-plus mr-1"> </i> Add User </button> </a>
             </div>
 
                 @if(Session::has('message'))
@@ -34,15 +34,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- <div class="bs-toast toast toast-placement-ex m-2" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
-                        <div class="toast-header">
-                            <i class="bx bx-bell me-2"></i>
-                            <div class="me-auto fw-semibold">Neno Laser Clinic</div>
-                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                            </div>
-                        <div class="toast-body">{{Session('message')}}</div>
-                    </div> --}}
                 @endif
 
             <!-- Hoverable Table rows -->
@@ -51,52 +42,14 @@
                 <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
-                    <th>#</th>
-                    <th>Full Name</th>
-                    <th>Username</th>
-                    <th>Contact</th>
-                    <th>Email</th>
-                    <th>Level</th>
-                    <th>Status</th>
-                    <th>Action</th>
-
-                    {{-- <th>
-                        Full Name
-                        <span onclick="sortcolumn('fullname')" class="float-right text-sm" style="cursor: pointer">
-                            <i class="menu-icon tf-icons bx bx-arrow-from-bottom"> </i>
-                            <i class="menu-icon tf-icons bx bx-arrow-from-top"> </i>
-                        </span>
-                    </th>
-                    <th>
-                        Username
-                        <span class="float-right text-sm" style="cursor: pointer">
-                            <i class="menu-icon tf-icons bx bx-arrow-from-bottom"> </i>
-                            <i class="menu-icon tf-icons bx bx-arrow-from-top"> </i>
-                        </span>
-                    </th>
-                    <th>Contact</th>
-                    <th>
-                        Email
-                        <span class="float-right text-sm" style="cursor: pointer">
-                            <i class="menu-icon tf-icons bx bx-arrow-from-bottom"> </i>
-                            <i class="menu-icon tf-icons bx bx-arrow-from-top"> </i>
-                        </span>
-                    </th>
-                    <th>
-                        Level
-                        <span class="float-right text-sm" style="cursor: pointer">
-                            <i class="menu-icon tf-icons bx bx-arrow-from-bottom"> </i>
-                            <i class="menu-icon tf-icons bx bx-arrow-from-top"> </i>
-                        </span>
-                    </th>
-                    <th>
-                        Status
-                        <span class="float-right text-sm" style="cursor: pointer">
-                            <i class="menu-icon tf-icons bx bx-arrow-from-bottom"> </i>
-                            <i class="menu-icon tf-icons bx bx-arrow-from-top"> </i>
-                        </span>
-                    </th> --}}
-
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Level</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
@@ -145,10 +98,10 @@
                             <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{route('usermaster.edituser', ['id' => $value->id])}}">
+                            <a class="dropdown-item" href="{{route('usermaster.edit', ['id' => $value->id])}}">
                                 <i class="bx bx-edit-alt me-1"></i> Edit
                             </a>
-                            <a class="dropdown-item" href="{{route('usermaster.deleteuser', ['id' => $value->id])}}">
+                            <a class="dropdown-item" href="{{route('usermaster.delete', ['id' => $value->id])}}">
                                 <i class="bx bx-trash me-1"></i> Delete
                             </a>
                             <a class="dropdown-item" href="{{route('usermaster.sendpassword', ['id' => $value->id])}}">

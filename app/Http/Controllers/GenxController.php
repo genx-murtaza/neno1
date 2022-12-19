@@ -89,7 +89,7 @@ class GenxController extends Controller
 
     public function adduser()
     {
-        return view ('usermaster-adduser');
+        return view ('usermaster-add');
 
     }
 
@@ -165,7 +165,7 @@ class GenxController extends Controller
         $data = Login::find($id);
 
         $takeaway = compact('data');
-        return view ('usermaster-edituser')->with($takeaway);
+        return view ('usermaster-edit')->with($takeaway);
         die();
     }
 
@@ -210,7 +210,7 @@ class GenxController extends Controller
         $data = Login::find($id);
 
         $takeaway = compact('data');
-        return view ('usermaster-deleteuser')->with($takeaway);
+        return view ('usermaster-delete')->with($takeaway);
         die();
     }
 
@@ -266,7 +266,7 @@ class GenxController extends Controller
 
     public function addcustomer()
     {
-        return view ('customermaster-adduser');
+        return view ('customermaster-add');
 
     }
 
@@ -300,8 +300,118 @@ class GenxController extends Controller
 
             return redirect('customers')->with('message', 'Customer Record has been Successfully Added');
             die();
-
     }
 
+    public function editcustomer($id)
+    {
+        $data = Customer::find($id);
+
+        $takeaway = compact('data');
+        return view ('customermaster-edit')->with($takeaway);
+        die();
+    }
+
+    public function saveeditcustomer($id, Request $request)
+    {
+        $age18 = date('2004/01/01');
+        $startdt = date('1950/01/01');
+        $request->validate(
+            [
+                'dob'           => 'nullable|after:'.$startdt.'|before:'.$age18,
+                'fullname'      => 'required|min:5|max:50',
+                'phone'         => 'nullable|min:10|max:21',
+                'email'         => 'nullable|email',
+                'treatment'     => 'required|min:10|max:250',
+                'amount'        => 'required|integer|min:1000|max:500000',
+                'discount'      => 'nullable|integer|min:100|max:100000',
+                'reference'     => 'nullable|min:5|max:50',
+            ]
+            );
+            $cust = Customer::find($id);
+            $cust->cname       = $request['fullname'];
+            $cust->ccontact    = $request['phone'];
+            $cust->cemail      = $request['email'];
+            $cust->cdob        = $request['dob'];
+            $cust->ctreatment  = $request['treatment'];
+            $cust->camount     = $request['amount'];
+            $cust->cdisc       = $request['discount'];
+            $cust->creference  = $request['reference'];
+            $cust->save();
+            return redirect('customers')->with('message', 'Customer Record has been Successfully Edited');
+            die();
+    }
+
+    public function deletecustomer($id)
+    {
+        $data = Login::find($id);
+
+        $takeaway = compact('data');
+        return view ('usermaster-delete')->with($takeaway);
+        die();
+    }
+
+    public function confirmdeletecustomer($id)
+    {
+        $data = Login::find($id);
+        $data->delete();
+        return redirect('usermaster')->with('message', 'Record Successfully Deleted');
+        die();
+    }
+
+
+    // Payments
+
+    public function payments()
+    {
+        session()->forget(['customerID']);
+        session(['paymentstatus'=>'0']);
+        $allpayments = null;
+        $check = null;
+        $allcustname = Customer::select('cname')->orderBy('cname')->get();
+        $data = compact('allpayments','allcustname','check');
+        return view ('payments')->with($data);
+    }
+
+    public function showpayments(Request $request)
+    {
+        session(['paymentstatus'=>'0']);
+        $allpayments = null;
+        $allcustname = Customer::select('cname')->orderBy('cname')->get();
+        $check = Customer::where([
+            'cname' => $request['custid']
+        ])->first();
+
+        if($check)  // If Customer Found
+        {
+            session(['customerID'=> $check['cid']]);
+            $checkpayments = Payment::where([
+                'cid' => $check['cid']
+            ])->first();
+
+            if ($checkpayments) // If there is any Payment
+            {
+                session(['paymentstatus'=>'2']);
+                $allpayments = Payment::where(['cid' => $check['cid']])->orderBy('preceiptno')->get();
+                $data = compact('allpayments','allcustname','check');
+                return view ('payments')->with($data);
+            }
+            else        // If there is NO Payment
+            {
+                session(['paymentstatus'=>'1']);
+                $data = compact('allpayments','allcustname','check');
+                return view ('payments')->with($data);
+            }
+        }
+        else    // If Customer Not Found
+        {
+            return redirect('payments')->with('message', 'Customer Not Found');
+        }
+    }
+
+
+    public function addpayments()
+    {
+        return view ('payments-add');
+    }
 
 }

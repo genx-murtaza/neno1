@@ -1,4 +1,6 @@
 @if (session()->has('username'))
+
+@if (session()->has('customerID'))
     @extends('layouts.main')
     @section('main-section')
 
@@ -28,7 +30,7 @@
                             <div class="alert alert-danger">{{Session::get('fail')}} </div>
                         @endif
 
-                      <form action="{{url('/customers/addcustomer')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{url('/customers/add')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Full Name</label>
@@ -170,6 +172,13 @@
             </div>
             <!-- / Content -->
     @endsection
+
+@else
+    <?php
+        header('Location: /payments');
+        die();
+    ?>
+@endif
 
 @else
     <?php

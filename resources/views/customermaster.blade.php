@@ -18,7 +18,7 @@
             </nav>
 
             <div class= "d-flex justify-content-end mb-2 mt-2">
-                <a href="{{url('/customers/addcustomer')}}"> <button class="btn btn-primary"> <i class="bx bx-user-plus mr-1"> </i> Add New Customer </button> </a>
+                <a href="{{url('/customers/add')}}"> <button class="btn btn-primary"> <i class="bx bx-user-plus mr-1"> </i> Add New Customer </button> </a>
             </div>
 
                 @if(Session::has('message'))
@@ -82,10 +82,10 @@
                             <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{route('usermaster.edituser', ['id' => $value->cid])}}">
+                            <a class="dropdown-item" href="{{route('customers.edit', ['id' => $value->cid])}}">
                                 <i class="bx bx-edit-alt me-1"></i> Edit
                             </a>
-                            <a class="dropdown-item" href="{{route('usermaster.deleteuser', ['id' => $value->cid])}}">
+                            <a class="dropdown-item" href="{{route('customers.delete', ['id' => $value->cid])}}">
                                 <i class="bx bx-trash me-1"></i> Delete
                             </a>
                         </div>

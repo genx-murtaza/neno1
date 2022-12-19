@@ -78,7 +78,7 @@
                     </li>
 
                     <!-- User Master-->
-                    @if (request()->is('usermaster') or request()->is('usermaster/adduser') or request()->is('usermaster/edituser/{id?}'))
+                    @if (request()->is('usermaster') or request()->is('usermaster/add') or request()->is('usermaster/edit/{id?}'))
                         <?php $mk='active'; ?>
                     @else
                         <?php $mk=''; ?>
@@ -93,7 +93,7 @@
                     </li>
 
                     <!-- Customer Master-->
-                    @if (request()->is('customers') or request()->is('customers/adduser'))
+                    @if (request()->is('customers') or request()->is('customers/add'))
                         <?php $mk='active'; ?>
                     @else
                        <?php $mk=''; ?>
@@ -106,7 +106,7 @@
                     </li>
 
                     <!-- Daily Rgister -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Daily Rgister</span></li>
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Daily Register</span></li>
 
                     <li class="menu-item" >
                     <a href="cards-basic.html" class="menu-link">
@@ -122,10 +122,15 @@
                         </a>
                     </li>
 
-                    <li class="menu-item">
-                        <a href="cards-basic.html" class="menu-link">
+                    @if (request()->is('payments') or request()->is('payments/add'))
+                        <?php $mk='active'; ?>
+                    @else
+                       <?php $mk=''; ?>
+                    @endif
+                    <li class="menu-item {{$mk}}">
+                        <a href="{{url('/payments')}}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dollar"></i>
-                            <div data-i18n="Basic">Paymemts</div>
+                            <div data-i18n="Basic">Payments</div>
                         </a>
                     </li>
 

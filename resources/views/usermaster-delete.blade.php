@@ -23,7 +23,7 @@
                   <div class="card mb-4">
                     <div class="card-body">
 
-                      <form action="{{url('/usermaster/deleteuser') . '/' . $data->id}}" method="post">
+                      <form action="{{url('/usermaster/delete') . '/' . $data->id}}" method="post">
                         @csrf
 
                         <div class="row mb-3">
