@@ -42,9 +42,8 @@ Route::post('/customers/delete/{id}',[GenxController::class,'confirmdeletecustom
 
 Route::get('/payments', [GenxController::class, 'payments']);
 Route::post('/payments', [GenxController::class, 'showpayments']);
-
 Route::get('/payments/add', [GenxController::class, 'addpayments']);
-Route::post('/payments/add', [GenxController::class, 'saveaddpayments']);
+Route::post('/payments/add', [GenxController::class, 'savenewpayments']);
 
 // Route::get('/customers', CustomerMaster::class);
 // Route::get('/customers/adduser', CustomerAdduser::class);

@@ -105,6 +105,37 @@
                             </div>
                         </div>
 
+                        @php
+                            $paid = App\Http\Controllers\GenxController::calculatePayment($check['cid']);
+                            $balance = $check['camount'] - $check['cdisc'] - $paid;
+                        @endphp
+
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-discount">Paid</label>
+                            <div class="col-sm-10">
+                              <div class="input-group input-group-merge">
+                                  <span id="basic-icon-default-discount" class="input-group-text">
+                                      <i class="bx bx-dollar"></i>
+                                  </span>
+                                  <input type="text" class="form-control" value="{{$paid}}" name="discount" readonly/>
+                                  <span class="input-group-text">.00</span>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-discount">balance</label>
+                            <div class="col-sm-10">
+                              <div class="input-group input-group-merge">
+                                  <span id="basic-icon-default-discount" class="input-group-text">
+                                      <i class="bx bx-dollar"></i>
+                                  </span>
+                                  <input type="text" class="form-control" value="{{$balance}}" name="discount" readonly/>
+                                  <span class="input-group-text">.00</span>
+                              </div>
+                            </div>
+                        </div>
+
                         @endif
                     </form>
                   </div>

@@ -413,12 +413,45 @@ class GenxController extends Controller
         return $paymentdone;
     }
 
+    public static function NewReceiptNo()
+    {
+        return Payment::latest()->value('preceiptno') + 1;
+    }
+
     public function addpayments()
     {
         $custdetails = Customer::where(['cid' => Session('customerID')])->first();
         $paymentdone = Payment::where('cid',Session('customerID'))->sum('pamount');
-        $data = compact('custdetails','paymentdone');
+        $receiptNo = Payment::latest()->value('preceiptno') + 1;
+        // $receiptNo = Payment::max('preceiptno')
+        $staffname = Login::select('fullname')->orderBy('fullname')->get();
+
+        $data = compact('custdetails','paymentdone','staffname');
         return view ('payments-add')->with($data);;
+    }
+
+    public function savenewpayments(Request $request)
+    {
+        $request->validate(
+            [
+                'receiptdate'   => 'required|after:yesterday|before:tomorrow',
+                'amount'        => 'required_with:balance|integer|min:100|max:'.(int)$request->balance,
+                'collected'     => 'required|min:5|max:50',
+            ]
+            );
+
+            $payment                = new Payment();
+            $payment->preceiptno    = $request['receiptno'];
+            $payment->preceiptdt    = $request['receiptdate'];
+            $payment->pamount       = $request['amount'];
+            $payment->pmode         = $request['mode'];
+            $payment->receivedby    = $request['collected'];
+            $payment->branch        = $request['branch'];
+            $payment->cid           = $request['custid'];
+            $payment->save();
+
+            return redirect('payments')->with('message', 'Payment Successfully Added');
+            die();
     }
 
 }
