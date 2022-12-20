@@ -463,7 +463,7 @@ class GenxController extends Controller
          $check = null;
          $allcustname = Customer::select('cname')->orderBy('cname')->get();
          $data = compact('allpayments','allcustname','check');
-         return view ('payments')->with($data);
+         return view ('visits')->with($data);
      }
 
      public function showvisits(Request $request)
@@ -478,62 +478,78 @@ class GenxController extends Controller
          if($check)  // If Customer Found
          {
              session(['customerID'=> $check['cid']]);
-             $checkpayments = Payment::where([
+             $checkpayments = Treatment::where([
                  'cid' => $check['cid']
              ])->first();
 
-             if ($checkpayments) // If there is any Payment
+             if ($checkpayments) // If there is any Visit
              {
                  session(['paymentstatus'=>'2']);
-                 $allpayments = Payment::where(['cid' => $check['cid']])->orderBy('preceiptno')->get();
+                 $allpayments = Treatment::where(['cid' => $check['cid']])->orderBy('tid','desc')->get();
                  $data = compact('allpayments','allcustname','check');
-                 return view ('payments')->with($data);
+                 return view ('visits')->with($data);
              }
-             else        // If there is NO Payment
+             else        // If there is NO Visit
              {
                  session(['paymentstatus'=>'1']);
                  $data = compact('allpayments','allcustname','check');
-                 return view ('payments')->with($data);
+                 return view ('visits')->with($data);
              }
          }
          else    // If Customer Not Found
          {
-             return redirect('payments')->with('message', 'Customer Not Found');
+             return redirect('visits')->with('message', 'Customer Not Found');
          }
+     }
+
+     public static function countVisits($cid)
+     {
+         $cv = Treatment::where('cid',$cid)->count('tid');
+         return $cv;
+     }
+
+     public static function LastVisits($cid)
+     {
+         $lv = Treatment::select('tdot')->where('cid',$cid)->max('tdot');
+         return $lv;
+     }
+
+     public static function LastPaymentDate($cid)
+     {
+         $lv = Payment::select('preceiptdt')->where('cid',$cid)->max('preceiptdt');
+         return $lv;
      }
 
      public function addvisits()
      {
          $custdetails = Customer::where(['cid' => Session('customerID')])->first();
          $paymentdone = Payment::where('cid',Session('customerID'))->sum('pamount');
-         $receiptNo = Payment::latest()->value('preceiptno') + 1;
          // $receiptNo = Payment::max('preceiptno')
          $staffname = Login::select('fullname')->orderBy('fullname')->get();
 
          $data = compact('custdetails','paymentdone','staffname');
-         return view ('payments-add')->with($data);;
+         return view ('visits-add')->with($data);
      }
 
      public function savenewvisits(Request $request)
      {
          $request->validate(
              [
-                 'receiptdate'   => 'required|after:yesterday|before:tomorrow',
-                 'amount'        => 'required_with:balance|integer|min:100|max:'.(int)$request->balance,
+                 'visitdate'    => 'required|after:yesterday|before:tomorrow',
+                 'settings'     => 'required|min:5|max:10',
+                 'comments'     => 'nullable|min:10|max:500',
+
              ]
              );
 
-             $payment                = new Payment();
-             $payment->preceiptno    = $request['receiptno'];
-             $payment->preceiptdt    = $request['receiptdate'];
-             $payment->pamount       = $request['amount'];
-             $payment->pmode         = $request['mode'];
-             $payment->receivedby    = Session('fullname');
-             $payment->branch        = $request['branch'];
-             $payment->cid           = $request['custid'];
-             $payment->save();
+             $visits            = new Treatment();
+             $visits->tdot      = $request['visitdate'];
+             $visits->settings  = $request['settings'];
+             $visits->tcomments = $request['comments'];
+             $visits->cid       = $request['custid'];
+             $visits->save();
 
-             return redirect('payments')->with('message', 'Payment Successfully Added');
+             return redirect('visits')->with('message', 'Visits Successfully Added');
              die();
      }
 

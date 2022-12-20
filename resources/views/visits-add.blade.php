@@ -15,9 +15,9 @@
                         <a href="javascript:void(0);">Master</a>
                       </li>
                       <li class="breadcrumb-item">
-                        <a href="{{url('/payments')}}">Payments</a>
+                        <a href="{{url('/visits')}}">Visits</a>
                       </li>
-                      <li class="breadcrumb-item active">Add Payment</li>
+                      <li class="breadcrumb-item active">Add Visits</li>
                     </ol>
                 </nav>
 
@@ -30,7 +30,7 @@
                             <div class="alert alert-danger">{{Session::get('fail')}} </div>
                         @endif
 
-                      <form action="{{url('/payments/add')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{url('/visits/add')}}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <input type="text" class="form-control" value="{{$custdetails->cid}}" name="custid" hidden/>
@@ -125,32 +125,16 @@
                         </div>
 
                         <hr>
-                        {{-- Take Input for Payment --}}
-                        @php
-                            $newReceiptNo = App\Http\Controllers\GenxController::NewReceiptNo();
-                        @endphp
 
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-receiptno">Receipt No</label>
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-visitdate">Visit Date</label>
                             <div class="col-sm-10">
                               <div class="input-group input-group-merge">
-                                  <span id="basic-icon-default-receiptno" class="input-group-text">
-                                      <i class="bx bx-pencil"></i>
-                                  </span>
-                                  <input type="text" class="form-control" value="{{$newReceiptNo}}" name="receiptno" Readonly/>
-                              </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-receiptdate">Receipt Date</label>
-                            <div class="col-sm-10">
-                              <div class="input-group input-group-merge">
-                                  <span id="basic-icon-default-receiptdate" class="input-group-text">
+                                  <span id="basic-icon-default-visitdate" class="input-group-text">
                                       <i class="bx bx-calendar"></i>
                                   </span>
-                                  <input class="form-control" type="date" value="{{old('receiptdate')}}" id="html5-date-input" name="receiptdate" />
-                                  @error('receiptdate')
+                                  <input class="form-control" type="date" value="{{old('visitdate')}}" id="html5-date-input" name="visitdate" />
+                                  @error('visitdate')
                                     {{$message}}
                                   @enderror
                               </div>
@@ -158,74 +142,42 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-amount">Amount (In Rs.)</label>
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-settings">Laser Settings</label>
                             <div class="col-sm-10">
                               <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-amount" class="input-group-text" >
-                                    <i class="bx bx-dollar"></i>
-                                </span>
-                                <input type="text" class="form-control phone-mask" placeholder="Amount Paid by Customer" value="{{old('amount')}}" name="amount" />
-                                <span class="input-group-text">.00</span>
-                                @error('amount')
-                                  {{"Amount Cannot be Greater than Balance Amount"}}
+                                  <span id="basic-icon-default-settings" class="input-group-text">
+                                      <i class="bx bx-pencil"></i>
+                                  </span>
+                                  <input type="text" class="form-control" Placeholder ="Enter Laser Settings" value="{{old('settings')}}" name="settings"/>
+                                  @error('settings')
+                                  {{$message}}
                                 @enderror
-                              </div>
-                            </div>
-                          </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-mode">Mode of Payment</label>
-                            <div class="col-sm-10">
-                              <div class="input-group input-group-mode">
-                                <span class="input-group-text"><i class="bx bx-badge"></i></span>
-                                <select class="form-select" name="mode">
-                                    <option value="Cash" selected>Cash</option>
-                                    <option value="PayTM">PayTM</option>
-                                    <option value="GPay">GPay</option>
-                                    <option value="Online">Online</option>
-                                    <option value="Bank">Bank</option>
-                                  </select>
                               </div>
                             </div>
                         </div>
 
-                        {{-- <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-collected">Collected By</label>
-                            <div class="col-sm-10">
-                                <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-pencil"></i></span>
-                                <input class="form-control" name="collected" list="datalistOptions" id="exampleDataList" placeholder="Type to search Staff Name..."/>
-                                <datalist id="datalistOptions">
-                                    @foreach ($staffname as $sname)
-                                        <option value="{{$sname->fullname}}"> {{$sname->fullname}} </option>
-                                    @endforeach
-                                </datalist>
-                                @error('collected')
-                                {{$message}}
-                                @enderror
-                                </div>
-                              </div>
-                        </div> --}}
-
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-icon-default-branch">Branch</label>
+                            <label class="col-sm-2 col-form-label" for="basic-icon-default-comments">Comments</label>
                             <div class="col-sm-10">
                               <div class="input-group input-group-merge">
-                                <span class="input-group-text"><i class="bx bx-badge"></i></span>
-                                <select class="form-select" name="branch">
-                                    <option value="Begumpura">Begumpura</option>
-                                    <option value="Nanpura" selected>Nanpura</option>
-                                  </select>
+                                  <span id="basic-icon-default-settings" class="input-group-text">
+                                      <i class="bx bx-pencil"></i>
+                                  </span>
+                                  <textarea class="form-control" value="{{old('comments')}}" name="comments"></textarea>
+                                  @error('comments')
+                                  {{$message}}
+                                @enderror
                               </div>
                             </div>
                         </div>
+
 
                         <div class="row justify-content-end">
                           <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary">
-                                <i class="menu-icon tf-icons bx bx-save"></i> Save Payment</button>
+                                <i class="menu-icon tf-icons bx bx-save"></i> Save Visit</button>
 
-                            <a href="{{url('/payments')}}">
+                            <a href="{{url('/visits')}}">
                                 <button type="button" class="btn btn-primary">
                                     <i class="menu-icon tf-icons bx bx-block"></i> Cancel</button>
                             </a>

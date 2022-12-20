@@ -52,7 +52,9 @@
                         <th>Discount</th>
                         <th>Paid</th>
                         <th>Balance</th>
+                        <th>Last Payment</th>
                         <th>Visits</th>
+                        <th>Last Visit</th>
                         <th>Reference</th>
                     </tr>
                 </thead>
@@ -72,12 +74,17 @@
                     <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->camount}} </div></p> </td>
                     <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->cdisc ? $value->cdisc : '0'}} </div></p> </td>
                     @php
+                        $lastPaymentDate = App\Http\Controllers\GenxController::LastPaymentDate($value->cid);
+                        $lastvisit = App\Http\Controllers\GenxController::LastVisits($value->cid);
+                        $totalvisits = App\Http\Controllers\GenxController::countVisits($value->cid);
                         $paid = App\Http\Controllers\GenxController::calculatePayment($value->cid);
                         $balance = $value->camount - $value->cdisc - $paid;
                     @endphp
                     <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px">{{$paid}}</div></p> </td>
                     <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px">{{$balance}}</div></p> </td>
-                    <td> <p style="font-size:13px"> 0 </p> </td>
+                    <td> <p style="font-size:13px"> {{$lastPaymentDate?date('d-M-Y',strtotime($lastPaymentDate)):''}} </p> </td>
+                    <td> <p style="font-size:13px"> {{$totalvisits}} </p> </td>
+                    <td> <p style="font-size:13px"> {{$lastvisit?date('d-M-Y',strtotime($lastvisit)):''}} </p> </td>
                     <td> <p style="font-size:13px"> {{$value->creference ? $value->creference : '---'}} </p> </td>
 
                     <td>
@@ -89,7 +96,8 @@
                             <a class="dropdown-item" href="{{route('customers.edit', ['id' => $value->cid])}}">
                                 <i class="bx bx-edit-alt me-1"></i> Edit
                             </a>
-                            <a class="dropdown-item" href="{{route('customers.delete', ['id' => $value->cid])}}">
+                            <a class="dropdown-item" href="">
+                                {{-- {{route('customers.delete', ['id' => $value->cid])}} --}}
                                 <i class="bx bx-trash me-1"></i> Delete
                             </a>
                         </div>

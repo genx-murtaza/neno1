@@ -13,7 +13,7 @@
                   <li class="breadcrumb-item">
                     <a href="javascript:void(0);">Daily Register</a>
                   </li>
-                  <li class="breadcrumb-item active">Payments</li>
+                  <li class="breadcrumb-item active">Visits</li>
                 </ol>
             </nav>
 
@@ -21,7 +21,7 @@
                 <div class="card mb-4">
                   <div class="card-body">
 
-                    <form action="{{url('/payments')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{url('/visits')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Select Customer</label>
@@ -144,7 +144,7 @@
 
                 @if(Session::get('paymentstatus') == '2' OR Session::get('paymentstatus') == '1')
                     <div class= "d-flex justify-content-end mb-2 mt-2">
-                        <a href="{{url('/payments/add')}}"> <button class="btn btn-primary"> <i class="bx bx-dollar mr-1"> </i> Add Payment </button> </a>
+                        <a href="{{url('/visits/add')}}"> <button class="btn btn-primary"> <i class="bx bx-dollar mr-1"> </i> Add Visit </button> </a>
                     </div>
                 @endif
 
@@ -170,12 +170,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Receipt No</th>
-                                <th>Receipt Date</th>
-                                <th>Paid</th>
-                                <th>Mode</th>
-                                <th>Received By</th>
-                                <th>Branch</th>
+                                <th>Visit Date</th>
+                                <th>Settings</th>
+                                <th>Comments</th>
                             </tr>
                         </thead>
 
@@ -188,7 +185,7 @@
 
                             @elseif(Session::get('paymentstatus') == '1')
                             <tr>
-                                    <td colspan=13> <div class="alert alert-danger"> No Payment for Selected Customer </div> </td>
+                                    <td colspan=13> <div class="alert alert-danger"> No Visits for Selected Customer </div> </td>
                                 </tr>
 
                             @elseif(Session::get('paymentstatus') == '2')
@@ -200,22 +197,16 @@
                             <?php $totalpaid+=$value->pamount?>
                             <tr>
                                 <td> <p style="font-size:13px"> {{$no++}} </p> </td>
-                                <td> <div class= "d-flex justify-content-end">  <p style="font-size:13px"> {{$value->preceiptno}} </p> </div> </td>
-                                <td> <p style="font-size:13px"> {{date('d-M-Y',strtotime($value->preceiptdt))}} </p> </td>
-                                <td> <div class= "d-flex justify-content-end">  <p style="font-size:13px"> {{$value->pamount}} </p> </div> </td>
-                                <td> <p style="font-size:13px"> {{$value->pmode}} </p> </td>
-                                <td> <p style="font-size:13px"> {{$value->receivedby}} </p> </td>
-                                <td> <p style="font-size:13px"> {{$value->branch}} </p> </td>
+                                <td> <p style="font-size:13px"> {{date('d-M-Y',strtotime($value->tdot))}} </p> </td>
+                                <td> <p style="font-size:13px"> {{$value->settings}} </p> </td>
+                                <td> <p style="font-size:13px"> {{$value->tcomments}} </p> </td>
                             </tr>
                             @endforeach
                             <?php $no--; ?>
                             <tr>
-                                <td> <p style="font-size:13px"> <b> {{$no}} </b> </p> </td>
                                 <td> <p style="font-size:13px"> --- </p> </td>
-                                <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> <b> Total Paid </b> </p> </div> </td>
-                                <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> <b> {{$totalpaid}} </b> </p> </div> </td>
-                                <td> <p style="font-size:13px"> --- </p> </td>
-                                <td> <p style="font-size:13px"> --- </p> </td>
+                                <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> <b> Total Visits </b> </p> </div> </td>
+                                <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> <b> {{$no}} </b> </p> </div> </td>
                                 <td> <p style="font-size:13px"> --- </p> </td>
                             </tr>
                             @endif
