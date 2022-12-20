@@ -258,7 +258,7 @@ class GenxController extends Controller
 
     public function customermaster()
     {
-        $allcustomers = Customer::get();
+        $allcustomers = Customer::orderBy('cid', 'desc')->get();
         $data = compact('allcustomers');
         return view ('customermaster')->with($data);
     }
@@ -452,5 +452,89 @@ class GenxController extends Controller
             return redirect('payments')->with('message', 'Payment Successfully Added');
             die();
     }
+
+     // Visits
+
+     public function visits()
+     {
+         session()->forget(['customerID']);
+         session(['paymentstatus'=>'0']);
+         $allpayments = null;
+         $check = null;
+         $allcustname = Customer::select('cname')->orderBy('cname')->get();
+         $data = compact('allpayments','allcustname','check');
+         return view ('payments')->with($data);
+     }
+
+     public function showvisits(Request $request)
+     {
+         session(['paymentstatus'=>'0']);
+         $allpayments = null;
+         $allcustname = Customer::select('cname')->orderBy('cname')->get();
+         $check = Customer::where([
+             'cname' => $request['custid']
+         ])->first();
+
+         if($check)  // If Customer Found
+         {
+             session(['customerID'=> $check['cid']]);
+             $checkpayments = Payment::where([
+                 'cid' => $check['cid']
+             ])->first();
+
+             if ($checkpayments) // If there is any Payment
+             {
+                 session(['paymentstatus'=>'2']);
+                 $allpayments = Payment::where(['cid' => $check['cid']])->orderBy('preceiptno')->get();
+                 $data = compact('allpayments','allcustname','check');
+                 return view ('payments')->with($data);
+             }
+             else        // If there is NO Payment
+             {
+                 session(['paymentstatus'=>'1']);
+                 $data = compact('allpayments','allcustname','check');
+                 return view ('payments')->with($data);
+             }
+         }
+         else    // If Customer Not Found
+         {
+             return redirect('payments')->with('message', 'Customer Not Found');
+         }
+     }
+
+     public function addvisits()
+     {
+         $custdetails = Customer::where(['cid' => Session('customerID')])->first();
+         $paymentdone = Payment::where('cid',Session('customerID'))->sum('pamount');
+         $receiptNo = Payment::latest()->value('preceiptno') + 1;
+         // $receiptNo = Payment::max('preceiptno')
+         $staffname = Login::select('fullname')->orderBy('fullname')->get();
+
+         $data = compact('custdetails','paymentdone','staffname');
+         return view ('payments-add')->with($data);;
+     }
+
+     public function savenewvisits(Request $request)
+     {
+         $request->validate(
+             [
+                 'receiptdate'   => 'required|after:yesterday|before:tomorrow',
+                 'amount'        => 'required_with:balance|integer|min:100|max:'.(int)$request->balance,
+             ]
+             );
+
+             $payment                = new Payment();
+             $payment->preceiptno    = $request['receiptno'];
+             $payment->preceiptdt    = $request['receiptdate'];
+             $payment->pamount       = $request['amount'];
+             $payment->pmode         = $request['mode'];
+             $payment->receivedby    = Session('fullname');
+             $payment->branch        = $request['branch'];
+             $payment->cid           = $request['custid'];
+             $payment->save();
+
+             return redirect('payments')->with('message', 'Payment Successfully Added');
+             die();
+     }
 
 }

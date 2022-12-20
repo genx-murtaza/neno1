@@ -77,12 +77,14 @@
                     <span class="menu-header-text">Master</span>
                     </li>
 
-                    <!-- User Master-->
-                    @if (request()->is('usermaster') or request()->is('usermaster/add') or request()->is('usermaster/edit/{id?}'))
-                        <?php $mk='active'; ?>
-                    @else
-                        <?php $mk=''; ?>
-                    @endif
+                    @if(Session::get('level') == '1')
+                        <!-- User Master-->
+                        @if (request()->is('usermaster') or request()->is('usermaster/add') or request()->is('usermaster/edit/{id?}'))
+                            <?php $mk='active'; ?>
+                        @else
+                            <?php $mk=''; ?>
+                        @endif
+
 
                     <li class="menu-item {{$mk}}">
                     {{-- {{ request()->is('usermaster') ? 'active' : '' }}"> --}}
@@ -91,6 +93,7 @@
                             <div data-i18n="Basic">User Master</div>
                         </a>
                     </li>
+                    @endif
 
                     <!-- Customer Master-->
                     @if (request()->is('customers') or request()->is('customers/add'))
@@ -108,32 +111,31 @@
                     <!-- Daily Rgister -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Daily Register</span></li>
 
-                    <li class="menu-item" >
-                    <a href="cards-basic.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar"></i>
-                        <div data-i18n="Basic">Appointments</div>
-                    </a>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="cards-basic.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-notepad"></i>
-                            <div data-i18n="Basic">Client Treatment</div>
-                        </a>
-                    </li>
-
-                    @if (request()->is('payments') or request()->is('payments/add'))
+                    @if (request()->is('visits') or request()->is('visits/add'))
                         <?php $mk='active'; ?>
                     @else
                        <?php $mk=''; ?>
                     @endif
                     <li class="menu-item {{$mk}}">
-                        <a href="{{url('/payments')}}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-dollar"></i>
-                            <div data-i18n="Basic">Payments</div>
+                        <a href="{{url('/visits')}}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-notepad"></i>
+                            <div data-i18n="Basic">Client Treatment</div>
                         </a>
                     </li>
 
+                    @if(Session::get('level') == '1')
+                        @if (request()->is('payments') or request()->is('payments/add'))
+                            <?php $mk='active'; ?>
+                        @else
+                        <?php $mk=''; ?>
+                        @endif
+                        <li class="menu-item {{$mk}}">
+                            <a href="{{url('/payments')}}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-dollar"></i>
+                                <div data-i18n="Basic">Payments</div>
+                            </a>
+                        </li>
+                    @endif
                      <!-- Reports -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Reports</span></li>
 
@@ -144,23 +146,14 @@
                     </a>
 
                     <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="forms-basic-inputs.html" class="menu-link">
-                                <div data-i18n="Basic Inputs">Client Records</div>
-                            </a>
-                        </li>
 
+                        @if(Session::get('level') == '1')
                         <li class="menu-item">
                             <a href="forms-input-groups.html" class="menu-link">
                                 <div data-i18n="Input groups">Payment Collection</div>
                             </a>
                         </li>
-
-                        <li class="menu-item">
-                            <a href="forms-basic-inputs.html" class="menu-link">
-                                <div data-i18n="Basic Inputs">Appointments</div>
-                            </a>
-                        </li>
+                        @endif
 
                         <li class="menu-item">
                             <a href="forms-input-groups.html" class="menu-link">
@@ -168,14 +161,6 @@
                             </a>
                         </li>
                     </ul>
-                    </li>
-
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-                    <li class="menu-item">
-                    <a href="" target="_blank" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-support"></i>
-                        <div data-i18n="Support">Support</div>
-                    </a>
                     </li>
                 </ul>
             </aside>
@@ -200,14 +185,6 @@
                             ?>
 
                             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                            {{-- <!-- Search -->
-                            <div class="navbar-nav align-items-center">
-                                <div class="nav-item d-flex align-items-center">
-                                    Welcome, {{session()->get('fullname')}}
-                                </div>
-                            </div>
-                            <!-- /Search --> --}}
-
                             <ul class="navbar-nav flex-row align-items-center ms-auto">
                                 <!-- Place this tag where you want the button to render. -->
                                 <li class="nav-item lh-1 me-3">
@@ -256,18 +233,6 @@
                                     <li>
                                     <div class="dropdown-divider"></div>
                                     </li>
-                                    <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-user me-2"></i>
-                                        <span class="align-middle">My Profile</span>
-                                    </a>
-                                    </li>
-                                    {{-- <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                    </a>
-                                    </li> --}}
                                     <li>
                                     <div class="dropdown-divider"></div>
                                     </li>
