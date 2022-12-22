@@ -179,6 +179,21 @@ class GenxController extends Controller
                 'phone' => 'required|min:10|max:10',
                 'email' => 'required|email',
                 'level' => 'required'
+            ],
+            [
+                'fullname.required' => 'Full Name is Compulsory',
+                'fullname.min' => 'Full Name Minimum :min Characters Require',
+                'fullname.max' => 'Full Name Maximum :max is Limit',
+                'password.required' => 'Password is Compulsory',
+                'password.confirmed' => 'Both Password Should be Match',
+                'password.min' => 'Password Minimum :min Characters Require',
+                'password.max' => 'Password Maximum :max is Limit',
+                'password_confirmation.required' => 'Confirmation Password is Required',
+                'phone.required' => 'Contact Number is Compulsory',
+                'phone.min' => 'Please Enter Valid Phone Number',
+                'phone.max' => 'Place Comma Between 2 Phone Numbers',
+                'email.required' => 'Valid Email is Compulsory',
+                'email.email' => 'Please Enter Valid Email',
             ]
             );
 
@@ -271,7 +286,6 @@ class GenxController extends Controller
 
     public function saveaddcustomer(Request $request)
     {
-        $age18 = date('2004/01/01');
         $startdt = date('1950/01/01');
         $request->validate(
             [
@@ -283,6 +297,27 @@ class GenxController extends Controller
                 'amount'        => 'required|integer|min:1000|max:500000',
                 'discount'      => 'nullable|integer|min:100|max:100000',
                 'reference'     => 'nullable|min:5|max:50',
+            ],
+            [
+                'dob.before' => 'Age must be 18 Years',
+                'fullname.required' => 'Full Name is Compulsory',
+                'fullname.min' => 'Full Name Minimum :min Characters Require',
+                'fullname.max' => 'Full Name Maximum :max is Limit',
+                'phone.min' => 'Please Enter Valid Phone Number',
+                'phone.max' => 'Place Comma Between 2 Phone Numbers',
+                'email.email' => 'Please Enter Valid Email',
+                'treatment.required' => 'Treatment is Compulsory',
+                'treatment.min' => 'Treatment Minimum :min Characters Require',
+                'treatment.max' => 'Treatment Maximum :max is Limit',
+                'amount.required' => 'Amount is Compulsory',
+                'amount.min' => 'Minumum Amount should be :min',
+                'amount.max' => 'Maximum Amount should be :max',
+                'amount.integer' => 'Only Digits are Allowed',
+                'discount.min' => 'Minumum Discount should be :min',
+                'discount.max' => 'Maximum Discount should be :max',
+                'discount.integer' => 'Only Digits are Allowed',
+                'reference.min' => 'Reference Name Minimum :min Characters Require',
+                'reference.max' => 'Reference Name Maximum :max is Limit',
             ]
             );
 
@@ -312,7 +347,6 @@ class GenxController extends Controller
 
     public function saveeditcustomer($id, Request $request)
     {
-        $age18 = date('2004/01/01');
         $startdt = date('1950/01/01');
         $request->validate(
             [
@@ -324,6 +358,27 @@ class GenxController extends Controller
                 'amount'        => 'required|integer|min:1000|max:500000',
                 'discount'      => 'nullable|integer|min:100|max:100000',
                 'reference'     => 'nullable|min:5|max:50',
+            ],
+            [
+                'dob.before' => 'Age must be 18 Years',
+                'fullname.required' => 'Full Name is Compulsory',
+                'fullname.min' => 'Full Name Minimum :min Characters Require',
+                'fullname.max' => 'Full Name Maximum :max is Limit',
+                'phone.min' => 'Please Enter Valid Phone Number',
+                'phone.max' => 'Place Comma Between 2 Phone Numbers',
+                'email.email' => 'Please Enter Valid Email',
+                'treatment.required' => 'Treatment is Compulsory',
+                'treatment.min' => 'Treatment Minimum :min Characters Require',
+                'treatment.max' => 'Treatment Maximum :max is Limit',
+                'amount.required' => 'Amount is Compulsory',
+                'amount.min' => 'Minumum Amount should be :min',
+                'amount.max' => 'Maximum Amount should be :max',
+                'amount.integer' => 'Only Digits are Allowed',
+                'discount.min' => 'Minumum Discount should be :min',
+                'discount.max' => 'Maximum Discount should be :max',
+                'discount.integer' => 'Only Digits are Allowed',
+                'reference.min' => 'Reference Name Minimum :min Characters Require',
+                'reference.max' => 'Reference Name Maximum :max is Limit',
             ]
             );
             $cust = Customer::find($id);
@@ -437,6 +492,15 @@ class GenxController extends Controller
             [
                 'receiptdate'   => 'required|after_or_equal:yesterday|before:tomorrow',
                 'amount'        => 'required_with:balance|integer|min:100|max:'.(int)$request->balance,
+            ],
+            [
+                'receiptdate.required' => 'Receipt Date is Missing',
+                'receiptdate.after_or_equal' => 'Only Yesterday & Todays Date are Allowed',
+                'receiptdate.before' => 'Only Yesterday & Todays Date are Allowed',
+                'amount.required' => 'Payment Amount is Missing',
+                'amount.integer' => 'Only Digits are Allowed',
+                'amount.min' => 'Minumum Amount should be :min',
+                'amount.max' => 'Amount should not Exceed Balance Amount',
             ]
             );
 
@@ -547,6 +611,16 @@ class GenxController extends Controller
                  'settings'     => 'required|min:5|max:10',
                  'comments'     => 'nullable|min:10|max:500',
 
+             ],
+             [
+                 'visitdate.required' => 'Receipt Date is Missing',
+                 'visitdate.after_or_equal' => 'Only Yesterday & Todays Date are Allowed',
+                 'visitdate.before' => 'Only Yesterday & Todays Date are Allowed',
+                 'settings.required' => 'Laser Setting is Missing',
+                 'settings.min' => 'Laser Setting Minimum :min Characters Require',
+                 'settings.max' => 'Laser Setting Maximum :max is Limit',
+                 'comments.min' => 'Comments Minimum :min Characters Require',
+                 'comments.max' => 'Comments Maximum :max is Limit',
              ]
              );
 
@@ -583,7 +657,14 @@ class GenxController extends Controller
             [
                 'paymentfromdt' => 'required|before_or_equal:now',
                 'paymenttodt'   => 'required|before_or_equal:now|after_or_equal:' . $request->paymentfromdt,
-             ]
+            ],
+            [
+                'paymentfromdt.required' => 'Payment From Date is Missing',
+                'paymentfromdt.before_or_equal' => 'Future Date are Not Allowed',
+                'paymenttodt.required' => 'Payment To Date is Missing',
+                'paymenttodt.before_or_equal' => 'Future Date are Not Allowed',
+                'paymenttodt.after_or_equal' => 'Date Should be Equal or Greater than '. date('d-M-Y',strtotime($request->paymentfromdt)),
+            ]
             );
 
         $paydata = Payment::whereDate('preceiptdt', '>=', $request->paymentfromdt)->whereDate('preceiptdt', '<=', $request->paymenttodt)->orderBy('preceiptno')->get();
@@ -613,6 +694,13 @@ class GenxController extends Controller
             [
                 'visitfromdt' => 'required|before_or_equal:now',
                 'visittodt'   => 'required|before_or_equal:now|after_or_equal:' . $request->visitfromdt,
+             ],
+             [
+                 'visitfromdt.required' => 'Payment From Date is Missing',
+                 'visitfromdt.before_or_equal' => 'Future Date are Not Allowed',
+                 'visittodt.required' => 'Payment To Date is Missing',
+                 'visittodt.before_or_equal' => 'Future Date are Not Allowed',
+                 'visittodt.after_or_equal' => 'Date Should be Equal or Greater than '. date('d-M-Y',strtotime($request->visitfromdt)),
              ]
             );
 
