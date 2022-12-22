@@ -64,28 +64,32 @@
                     <?php $no=1; ?>
                     @foreach($allcustomers as $value)
 
-                    <tr>
-                    <td> <p style="font-size:13px"> {{$no++}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->cname}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->ccontact ? $value->ccontact : '---'}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->cemail ? $value->cemail : '---' }} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->cdob ? date('d-M-Y',strtotime($value->cdob)) : '---' }} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->ctreatment}} </p> </td>
-                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->camount}} </div></p> </td>
-                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->cdisc ? $value->cdisc : '0'}} </div></p> </td>
                     @php
                         $lastPaymentDate = App\Http\Controllers\GenxController::LastPaymentDate($value->cid);
+                        $firstvisit = App\Http\Controllers\GenxController::FirstVisits($value->cid);
+                        $fouryear = date('Y-m-d', strtotime('-4 years'));
                         $lastvisit = App\Http\Controllers\GenxController::LastVisits($value->cid);
+
                         $totalvisits = App\Http\Controllers\GenxController::countVisits($value->cid);
                         $paid = App\Http\Controllers\GenxController::calculatePayment($value->cid);
                         $balance = $value->camount - $value->cdisc - $paid;
                     @endphp
-                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px">{{$paid}}</div></p> </td>
-                    <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px">{{$balance}}</div></p> </td>
-                    <td> <p style="font-size:13px"> {{$lastPaymentDate?date('d-M-Y',strtotime($lastPaymentDate)):''}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$totalvisits}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$lastvisit?date('d-M-Y',strtotime($lastvisit)):''}} </p> </td>
-                    <td> <p style="font-size:13px"> {{$value->creference ? $value->creference : '---'}} </p> </td>
+
+                    <tr>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$no++}} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$value->cname}} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$value->ccontact ? $value->ccontact : ''}} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$value->cemail ? $value->cemail : '' }} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$value->cdob ? date('d-M-Y',strtotime($value->cdob)) : '' }} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$value->ctreatment}} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->camount}} </div></p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <div class= "d-flex justify-content-end"> <p style="font-size:13px"> {{$value->cdisc ? $value->cdisc : '0'}} </div></p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <div class= "d-flex justify-content-end"> <p style="font-size:13px">{{$paid}}</div></p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <div class= "d-flex justify-content-end"> <p style="font-size:13px">{{$balance}}</div></p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$lastPaymentDate?date('d-M-Y',strtotime($lastPaymentDate)):''}} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$totalvisits}} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$lastvisit?date('d-M-Y',strtotime($lastvisit)):''}} </p> </td>
+                    <td> @if ($firstvisit AND $fouryear > $firstvisit) <font color="red"> @endif <p style="font-size:13px"> {{$value->creference ? $value->creference : ''}} </p> </td>
 
                     <td>
                         <div class="dropdown">

@@ -275,7 +275,7 @@ class GenxController extends Controller
         $startdt = date('1950/01/01');
         $request->validate(
             [
-                'dob'           => 'nullable|after:'.$startdt.'|before:'.$age18,
+                'dob'           => 'nullable|after:'.$startdt.'|before:-18 years',
                 'fullname'      => 'required|min:5|max:50',
                 'phone'         => 'nullable|min:10|max:21',
                 'email'         => 'nullable|email',
@@ -316,7 +316,7 @@ class GenxController extends Controller
         $startdt = date('1950/01/01');
         $request->validate(
             [
-                'dob'           => 'nullable|after:'.$startdt.'|before:'.$age18,
+                'dob'           => 'nullable|after:'.$startdt.'|before:-18 years',
                 'fullname'      => 'required|min:5|max:50',
                 'phone'         => 'nullable|min:10|max:21',
                 'email'         => 'nullable|email',
@@ -362,6 +362,7 @@ class GenxController extends Controller
 
     public function payments()
     {
+        session()->forget(['paymentstatus']);
         session()->forget(['customerID']);
         session(['paymentstatus'=>'0']);
         $allpayments = null;
@@ -434,7 +435,7 @@ class GenxController extends Controller
     {
         $request->validate(
             [
-                'receiptdate'   => 'required|after:yesterday|before:tomorrow',
+                'receiptdate'   => 'required|after_or_equal:yesterday|before:tomorrow',
                 'amount'        => 'required_with:balance|integer|min:100|max:'.(int)$request->balance,
             ]
             );
@@ -457,13 +458,14 @@ class GenxController extends Controller
 
      public function visits()
      {
-         session()->forget(['customerID']);
-         session(['paymentstatus'=>'0']);
-         $allpayments = null;
-         $check = null;
-         $allcustname = Customer::select('cname')->orderBy('cname')->get();
-         $data = compact('allpayments','allcustname','check');
-         return view ('visits')->with($data);
+        session()->forget(['paymentstatus']);
+        session()->forget(['customerID']);
+        session(['paymentstatus'=>'0']);
+        $allpayments = null;
+        $check = null;
+        $allcustname = Customer::select('cname')->orderBy('cname')->get();
+        $data = compact('allpayments','allcustname','check');
+        return view ('visits')->with($data);
      }
 
      public function showvisits(Request $request)
@@ -514,6 +516,12 @@ class GenxController extends Controller
          return $lv;
      }
 
+     public static function FirstVisits($cid)
+     {
+         $lv = Treatment::select('tdot')->where('cid',$cid)->min('tdot');
+         return $lv;
+     }
+
      public static function LastPaymentDate($cid)
      {
          $lv = Payment::select('preceiptdt')->where('cid',$cid)->max('preceiptdt');
@@ -535,7 +543,7 @@ class GenxController extends Controller
      {
          $request->validate(
              [
-                 'visitdate'    => 'required|after:yesterday|before:tomorrow',
+                 'visitdate'    => 'required|after_or_equal:yesterday|before:tomorrow',
                  'settings'     => 'required|min:5|max:10',
                  'comments'     => 'nullable|min:10|max:500',
 
@@ -552,5 +560,75 @@ class GenxController extends Controller
              return redirect('visits')->with('message', 'Visits Successfully Added');
              die();
      }
+
+     //Reports
+
+     public static function GetCustomerName($cid)
+     {
+         $lv = Customer::select('cname')->where('cid',$cid)->first();
+         return $lv;
+     }
+
+
+     public function ReportPayments()
+     {
+        session()->forget(['paymentstatus']);
+        return view ('report-payments');
+     }
+
+
+     public function ReportPaymentsShow(Request $request)
+     {
+        $request->validate(
+            [
+                'paymentfromdt' => 'required|before_or_equal:now',
+                'paymenttodt'   => 'required|before_or_equal:now|after_or_equal:' . $request->paymentfromdt,
+             ]
+            );
+
+        $paydata = Payment::whereDate('preceiptdt', '>=', $request->paymentfromdt)->whereDate('preceiptdt', '<=', $request->paymenttodt)->orderBy('preceiptno')->get();
+        if ($paydata) // If there is any Data
+        {
+            session(['paymentstatus'=>'1']);
+            $data = compact('paydata');
+            return view ('report-payments')->with($data);
+        }
+        else        // If there is NO Visit
+        {
+            session(['paymentstatus'=>'0']);
+            return view ('report-payments');
+        }
+     }
+
+     public function ReportVisits()
+     {
+        session()->forget(['paymentstatus']);
+        return view ('report-visits');
+     }
+
+
+     public function ReportVisitsShow(Request $request)
+     {
+        $request->validate(
+            [
+                'visitfromdt' => 'required|before_or_equal:now',
+                'visittodt'   => 'required|before_or_equal:now|after_or_equal:' . $request->visitfromdt,
+             ]
+            );
+
+        $Visitdata = Treatment::whereDate('tdot', '>=', $request->visitfromdt)->whereDate('tdot', '<=', $request->visittodt)->orderBy('tid')->get();
+        if ($Visitdata) // If there is any Data
+        {
+            session(['paymentstatus'=>'1']);
+            $data = compact('Visitdata');
+            return view ('report-visits')->with($data);
+        }
+        else        // If there is NO Visit
+        {
+            session(['paymentstatus'=>'0']);
+            return view ('report-visits');
+        }
+     }
+
 
 }

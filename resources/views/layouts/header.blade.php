@@ -149,14 +149,14 @@
 
                         @if(Session::get('level') == '1')
                         <li class="menu-item">
-                            <a href="forms-input-groups.html" class="menu-link">
+                            <a href="{{url('/reports/payments')}}" class="menu-link">
                                 <div data-i18n="Input groups">Payment Collection</div>
                             </a>
                         </li>
                         @endif
 
                         <li class="menu-item">
-                            <a href="forms-input-groups.html" class="menu-link">
+                            <a href="{{url('/reports/visits')}}" class="menu-link">
                                 <div data-i18n="Input groups">Treatment Record</div>
                             </a>
                         </li>

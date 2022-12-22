@@ -51,5 +51,10 @@ Route::get('/visits/add', [GenxController::class, 'addvisits']);
 Route::post('/visits/add', [GenxController::class, 'savenewvisits']);
 
 
+Route::get('/reports/payments', [GenxController::class, 'ReportPayments']);
+Route::post('/reports/payments', [GenxController::class, 'ReportPaymentsShow']);
+Route::get('/reports/visits', [GenxController::class, 'ReportVisits']);
+Route::post('/reports/visits', [GenxController::class, 'ReportVisitsShow']);
+
 // Route::get('/customers', CustomerMaster::class);
 // Route::get('/customers/adduser', CustomerAdduser::class);

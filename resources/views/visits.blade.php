@@ -167,6 +167,7 @@
                 <div class="card">
                     <div class="table-responsive text-nowrap">
                     <table class="table table-hover table-bordered">
+                        @if(Session::get('paymentstatus') == '1' OR Session::get('paymentstatus') == '2')
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -175,15 +176,10 @@
                                 <th>Comments</th>
                             </tr>
                         </thead>
+                        @endif
 
                         <tbody class="table-border-bottom-0">
-                            @if(Session::get('paymentstatus') == '0')
-                                {{-- session()->has('paymentstatus')) --}}
-                                <tr>
-                                    <td colspan=13> Select Customer Name from the List </td>
-                                </tr>
-
-                            @elseif(Session::get('paymentstatus') == '1')
+                            @if(Session::get('paymentstatus') == '1')
                             <tr>
                                     <td colspan=13> <div class="alert alert-danger"> No Visits for Selected Customer </div> </td>
                                 </tr>
@@ -203,12 +199,14 @@
                             </tr>
                             @endforeach
                             <?php $no--; ?>
+                            <thead>
                             <tr>
-                                <td> <p style="font-size:13px"> --- </p> </td>
+                                <td> <p style="font-size:13px"> </p> </td>
                                 <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> <b> Total Visits </b> </p> </div> </td>
                                 <td> <div class= "d-flex justify-content-end"> <p style="font-size:13px"> <b> {{$no}} </b> </p> </div> </td>
-                                <td> <p style="font-size:13px"> --- </p> </td>
+                                <td> <p style="font-size:13px"> </p> </td>
                             </tr>
+                            </thead>
                             @endif
                         </tbody>
                     </table>
