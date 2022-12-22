@@ -103,7 +103,7 @@ class GenxController extends Controller
                 'password_confirmation'=>'required',
                 'phone' => 'required|min:10|max:10',
                 'email' => 'required|email',
-                'level' => 'required'
+                'level' => 'required|in:1,2,3,4,5'
             ]
             );
 
@@ -178,7 +178,7 @@ class GenxController extends Controller
                 'password_confirmation'=>'required',
                 'phone' => 'required|min:10|max:10',
                 'email' => 'required|email',
-                'level' => 'required'
+                'level' => 'required|in:1,2,3,4,5',
             ],
             [
                 'fullname.required' => 'Full Name is Compulsory',

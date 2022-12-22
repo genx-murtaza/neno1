@@ -149,7 +149,14 @@
                 @endif
 
                 @if(Session::has('message'))
-                    <div class="toast-container">
+                <script>
+                    Swal.fire({
+                    title: 'Action Successful',
+                    showClass: { popup: 'animate__animated animate__fadeInDown'},
+                    hideClass: { popup: 'animate__animated animate__fadeOutUp' }
+                    })
+                </script>
+                    {{-- <div class="toast-container">
                         <div class="bs-toast toast-placement-ex m-5 top-0 end-0 toast fade show" role="alert" aria-live="assertive" data-delay="2000" aria-atomic="true">
                             <div class="toast-header">
                                 <i class="bx bx-bell me-2"></i>
@@ -160,7 +167,7 @@
                                 {{Session('message')}}
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 @endif
 
                 <!-- Hoverable Table rows -->

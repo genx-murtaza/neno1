@@ -38,7 +38,7 @@
                                   <i class="bx bx-book-content">
                                   </i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Full Name" value="{{old('fullname')}}" name="fullname"/>
+                                <input type="text" class="form-control @error('fullname') is-invalid @enderror" placeholder="Full Name" value="{{old('fullname')}}" name="fullname"/>
                                 @error('fullname')
                                   {{$message}}
                                 @enderror
@@ -53,7 +53,7 @@
                                 <span id="basic-icon-default-phone" class="input-group-text">
                                     <i class="bx bx-phone"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="9033755110" value="{{old('phone')}}" name="phone" />
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="9033755110" value="{{old('phone')}}" name="phone" />
                                 @error('phone')
                                   {{$message}}
                                 @enderror
@@ -68,7 +68,7 @@
                                 <span id="basic-icon-default-email" class="input-group-text" >
                                     <i class="bx bx-envelope"></i>
                                 </span>
-                                <input type="text" class="form-control phone-mask" placeholder="admin@neno.co.in" value="{{old('email')}}" name="email" />
+                                <input type="text" class="form-control phone-mask @error('email') is-invalid @enderror" placeholder="admin@neno.co.in" value="{{old('email')}}" name="email" />
                                 @error('email')
                                   {{$message}}
                                 @enderror
@@ -81,7 +81,7 @@
                           <div class="col-sm-10">
                             <div class="input-group input-group-merge">
                               <span class="input-group-text"><i class="bx bx-calendar"></i></span>
-                              <input class="form-control" type="date" value="{{old('dob')}}" id="html5-date-input" name="dob" />
+                              <input class="form-control @error('dob') is-invalid @enderror" type="date" value="{{old('dob')}}" id="html5-date-input" name="dob" />
                               @error('dob')
                                   {{$message}}
                                 @enderror
@@ -96,7 +96,7 @@
                                   <span id="basic-icon-default-treatment" class="input-group-text">
                                       <i class="bx bx-book-content"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Treatment of Customer" value="{{old('treatment')}}" name="treatment" />
+                                  <input type="text" class="form-control @error('treatment') is-invalid @enderror" placeholder="Enter Treatment of Customer" value="{{old('treatment')}}" name="treatment" />
                                   @error('treatment')
                                     {{$message}}
                                   @enderror
@@ -111,7 +111,7 @@
                                   <span id="basic-icon-default-amount" class="input-group-text">
                                       <i class="bx bx-dollar"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Treatment Total Amount in Rs." value="{{old('amount')}}" name="amount"/>
+                                  <input type="text" class="form-control @error('amount') is-invalid @enderror" placeholder="Enter Treatment Total Amount in Rs." value="{{old('amount')}}" name="amount"/>
                                   <span class="input-group-text">.00</span>
                                   @error('amount')
                                     {{$message}}
@@ -127,7 +127,7 @@
                                   <span id="basic-icon-default-discount" class="input-group-text">
                                       <i class="bx bx-dollar"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Enter Discount Rs." value="{{old('discount')}}" name="discount" />
+                                  <input type="text" class="form-control @error('discount') is-invalid @enderror" placeholder="Enter Discount Rs." value="{{old('discount')}}" name="discount" />
                                   <span class="input-group-text">.00</span>
                                   @error('discount')
                                     {{$message}}
@@ -143,7 +143,7 @@
                                   <span id="basic-icon-default-reference" class="input-group-text">
                                       <i class="bx bx-user"></i>
                                   </span>
-                                  <input type="text" class="form-control" placeholder="Reference By Person Name" value="{{old('reference')}}" name="reference" />
+                                  <input type="text" class="form-control @error('reference') is-invalid @enderror" placeholder="Reference By Person Name" value="{{old('reference')}}" name="reference" />
                                   @error('reference')
                                     {{$message}}
                                   @enderror
