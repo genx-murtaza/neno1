@@ -22,13 +22,30 @@
             </div>
 
                 @if(Session::has('message'))
-                <script>
-                    Swal.fire({
-                    title: 'Action Successful',
-                    showClass: { popup: 'animate__animated animate__fadeInDown'},
-                    hideClass: { popup: 'animate__animated animate__fadeOutUp' }
-                    })
-                </script>
+                    <script>
+                        let timerInterval
+                        Swal.fire({
+                        title: 'Action Successful',
+                        html: 'Neno Laser Clinic',
+                        timer: 5000,
+                        timerProgressBar: false,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                            b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                        }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            console.log('I was closed by the timer')
+                        }
+                        })
+                    </script>
                     {{-- <div class="toast-container">
                         <div class="bs-toast toast-placement-ex m-5 top-0 end-0 toast fade show" role="alert" aria-live="assertive" data-delay="2000" aria-atomic="true">
                             <div class="toast-header">
