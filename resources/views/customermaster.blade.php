@@ -80,6 +80,7 @@
                         <th>Visits</th>
                         <th>Last Visit</th>
                         <th>Reference</th>
+                        <th></th>
                     </tr>
                 </thead>
 
